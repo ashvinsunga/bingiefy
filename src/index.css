@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --breakpoint-xs: 28rem;  
+    --breakpoint-md: 48rem;    /* Min-width: 768px */
+    --breakpoint-lg: 64rem;    /* Min-width: 1024px */
+    --breakpoint-xl: 80rem;    /* Min-width: 1280px */
+    --breakpoint-2xl: 96rem;   /* Min-width: 1536px */
+    --breakpoint-other: { min: "340px", max: "1200px" },
+}
+
+main{
+    max-width: 1280px;
+    margin: auto;
+    min-height: 90vh;
+    padding: 10px;
+}
