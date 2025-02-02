@@ -17,7 +17,7 @@ export const MovieDetail = () => {
       const response = await fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${import.meta.env.VITE_API_KEY}`);
       const json = await response.json()
       setMovie(json);
-      console.log(json);
+
     }
     fetchMovie();
   }, [params.id]);
