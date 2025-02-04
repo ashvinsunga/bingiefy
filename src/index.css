@@ -10,9 +10,10 @@
     --breakpoint-other: { min: "340px", max: "1200px" },
 }
 
-main{
+main {
     max-width: 1280px;
     margin: auto;
-    min-height: 90vh;
+    min-height: 100vh;
     padding: 10px;
 }
+

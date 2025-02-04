@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { ActorCard } from "../components";
 import { useTitle } from "../hooks/useTitle";
 import no_movie_image from "../assets/no_movie_image.jpg"
+
 
 export const MovieDetail = () => {
   const params = useParams();
   const [movie, setMovie] = useState({});
+  const [cast, setCast] = useState([]);
   
 
   useTitle(movie.title);
@@ -19,7 +22,15 @@ export const MovieDetail = () => {
       setMovie(json);
 
     }
+    async function fetchCredits(){
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${params.id}/credits?api_key=${import.meta.env.VITE_API_KEY}`);
+      const json = await response.json();
+      const limitedCast = json.cast.slice(0, 9)
+      setCast(limitedCast);
+
+    }
     fetchMovie();
+    fetchCredits();
   }, [params.id]);
 
   return (
@@ -38,6 +49,17 @@ export const MovieDetail = () => {
               )) }
             </p>
             ) : "" }
+          <div className="mb-10">
+            <p className="my-4">
+              <span className="mr-2 text-2xl font-bold">Cast</span>
+            </p>
+            <div className="grid grid-flow-row grid-cols-2 gap-4 md:grid-cols-3">
+              {cast.map((actor) => (
+              <ActorCard key={actor.id} actorImage={`https://image.tmdb.org/t/p/w500/${actor.profile_path}`} actorName={actor.name} characterName={actor.character}/>
+              ))}
+
+            </div>
+          </div>
           
           <div className="flex items-center">
               <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>

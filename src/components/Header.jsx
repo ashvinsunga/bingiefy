@@ -33,7 +33,7 @@ export const Header = () => {
     }, [darkMode]);
 
   return (
-    <nav className="bg-white border-gray-200 border-b-2 dark:bg-cyan-950 dark:border-b-1 dark:border-cyan-950">
+    <nav className="z-40 sticky top-0 bg-white border-gray-200 border-b-2 dark:bg-cyan-950 dark:border-b-1 dark:border-cyan-950">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <NavLink
           to="/"
